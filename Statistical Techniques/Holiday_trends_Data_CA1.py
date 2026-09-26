@@ -8,7 +8,7 @@
 
 # ## Add python libraries to analysis
 
-# In[1]:
+# In[25]:
 
 
 import pandas as pd
@@ -18,38 +18,36 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-# # Data Preparation
+# ## Data Preparation
 
 # ## Load the Dataset
 
-# In[2]:
+# In[26]:
 
 
 df_Holidays = pd.read_csv("Holiday_trends_Data_CA1.csv")
 
 
-# ## Data Cleaning
-
 # ### Display first 5 rows, to ensure the data has correctly loaded
 # 
 
-# In[3]:
+# In[27]:
 
 
 df_Holidays.head(5)
 
 
-# ####  Trim any spaces from the headings
+# ###  Trim any spaces from the headings
 
-# In[4]:
+# In[28]:
 
 
 df_Holidays.columns = df_Holidays.columns.str.strip()
 
 
-# ## Missing Value Analysis
+# ### Check for missing values
 
-# In[5]:
+# In[29]:
 
 
 df_Holidays.isnull().sum()
@@ -57,13 +55,13 @@ df_Holidays.isnull().sum()
 
 # ### No missing values were identified in the dataset. Therefore no records required removal
 
-# In[6]:
+# In[30]:
 
 
 df_Holidays.shape
 
 
-# In[7]:
+# In[31]:
 
 
 df_Holidays.info()
@@ -71,7 +69,7 @@ df_Holidays.info()
 
 # # Rename columns to make it more readable 
 
-# In[8]:
+# In[32]:
 
 
 df_Holidays = df_Holidays.rename(columns={
@@ -94,23 +92,25 @@ df_Holidays = df_Holidays.rename(columns={
     )
 
 
-# In[9]:
+# In[33]:
 
 
 df_Holidays.head(5)
 
 
-# # Descriptive Statistics
+# ## Show Statistics of the dataset
 
-# In[10]:
+# ###  Descriptive Statistics
+
+# In[34]:
 
 
 df_Holidays.describe().T
 
 
-# ## Skewness Analysis
+# ### Show Skewness of the data
 
-# In[11]:
+# In[35]:
 
 
 df_Holidays.skew(numeric_only=True)
@@ -122,9 +122,7 @@ df_Holidays.skew(numeric_only=True)
 
 # ### The Satisfaction skewness of (-0.74) indicates that responses are clustered towards the higher end of the rating scale.  This is suggesting that people were generally satisfied with their holiday experience
 
-# ## Median Analysis
-
-# In[12]:
+# In[36]:
 
 
 df_Holidays.median(numeric_only=True)
@@ -134,7 +132,7 @@ df_Holidays.median(numeric_only=True)
 
 # ### Show counts of dataset for Age Range, Holiday Purpose and Booking Method
 
-# In[13]:
+# In[37]:
 
 
 df_Holidays['Age_Range'].value_counts()
@@ -142,7 +140,7 @@ df_Holidays['Age_Range'].value_counts()
 
 # ### The largest responsent group was in the 25-34 range (12).  This was closely followed by the 35-44 and 45-54 age groups. The survey seems to have achieved a representation across most age categories, although fewer replies came from the over 65 age range
 
-# In[14]:
+# In[38]:
 
 
 df_Holidays['Holiday_Purpose'].value_counts()
@@ -152,7 +150,7 @@ df_Holidays['Holiday_Purpose'].value_counts()
 
 # ### Show Booking methods as a Percentage
 
-# In[15]:
+# In[39]:
 
 
 df_Holidays['Booking_Method'].value_counts(normalize=True) * 100
@@ -162,7 +160,7 @@ df_Holidays['Booking_Method'].value_counts(normalize=True) * 100
 
 # ## Run a pivot table to show Booking Methods broken down by Age Range
 
-# In[16]:
+# In[40]:
 
 
 # create a pivot table
@@ -182,7 +180,7 @@ pivot_bookings
 
 # ## Show the Booking Methods Pivot table as a bar chart
 
-# In[17]:
+# In[41]:
 
 
 pivot_chart = pivot_bookings.drop(
@@ -205,7 +203,7 @@ plt.show()
 
 # ## Analysis of Categorical Variables
 
-# In[18]:
+# In[47]:
 
 
 df_age = df_Holidays['Age_Range'].value_counts()
@@ -214,7 +212,7 @@ df_age
 
 # ### Reindex the data to show in age range order
 
-# In[19]:
+# In[48]:
 
 
 df_age = df_age.reindex( 
@@ -224,7 +222,7 @@ df_age = df_age.reindex(
 
 # ## Show Age Range Distribution in a Bar Chart
 
-# In[20]:
+# In[49]:
 
 
 plt.figure(figsize=(8,5) )
@@ -247,7 +245,7 @@ plt.show()
 
 # ### A new derived variable, Cost_Per_Night, was created by dividing Total_Cost by Holiday_Length. This gives a new metric for exploratory analysis, allowing holiday spending to be standarsised across all durations
 
-# In[21]:
+# In[87]:
 
 
 df_Daily_Cost = df_Holidays[
@@ -255,13 +253,13 @@ df_Daily_Cost = df_Holidays[
     ].copy()
 
 
-# In[22]:
+# In[88]:
 
 
 df_Daily_Cost.head(3)
 
 
-# In[23]:
+# In[89]:
 
 
 df_Daily_Cost["Cost_Per_Night"] = (
@@ -271,7 +269,7 @@ df_Daily_Cost["Cost_Per_Night"] = (
 df_Daily_Cost.head(3)
 
 
-# In[24]:
+# In[90]:
 
 
 df_Daily_Cost.describe().T
@@ -279,7 +277,7 @@ df_Daily_Cost.describe().T
 
 # ### Create a Pivot Table on the mean off the cost per night and compare with age range.  Plot the results on a Bar chart
 
-# In[25]:
+# In[94]:
 
 
 pivot_Group = pd.pivot_table(
@@ -292,7 +290,7 @@ pivot_Group = pd.pivot_table(
 pivot_Group
 
 
-# In[26]:
+# In[96]:
 
 
 plt.figure(figsize=(8,5) )
@@ -301,7 +299,7 @@ pivot_Group.plot.bar(
     color="steelblue",
     edgecolor="black")
 
-plt.title("Average Cost Per Night by Age Range")
+plt.title("Average Cost Per Nght by Age Range")
 plt.xlabel("Age Range")
 plt.ylabel("Average Cost (€)")
 
@@ -311,35 +309,23 @@ plt.show()
 
 # #### The chart above shows that respondents aged 45-54 recorded the highest average cost per night (€451.94).
 # #### This was followed by respondents aged 55-64 (€405.25) and 35-44(€369.99).
-# #### Respondents aged 65+ recorded the lowest cost per night (€238.09).
-# #### The results suggest that middle aged respondents tend to spend more per night on the overall holiday related expenditure, than their younger or older respondents.
-# #### However caution is needed when interpreting the results due to the smaller sample size in the 65+ category
+# #### Respondents aged 65+ recorded the llowest cost per night (€238.09).
+# #### This suggests that middle aged respondents tend to spend more per night on the overall holiday experience, that theie younger or elder respondents.
+# #### Although there is a noticeable decline in overall spending within the 65+ category, we need to consider the smaller sample size
 
-# In[27]:
+# In[99]:
 
 
-plt.figure(figsize=(8,5) )
+plt.figure(figsize=(8,6))
 
-sns.histplot(
-    data=df_Daily_Cost,
-    x="Cost_Per_Night",
-    bins=10,
-    kde=True,
-    color="Steelblue"
+sns.heatmap(
+df_GroupSize.corr(numeric_only=True),
+annot=True,
+cmap='coolwarm'
 )
+ 
+plt.title('Correlation Matrix')
 
-plt.title("Distribution of Cost Per Night")
-plt.xlabel("Cost Per Nighht (€)")
-plt.ylabel("Frequency")
-
-
-plt.show()
-
-
-
-# ####  The histogram of Cost_Per_Night demonstrates a positive skewed distribution.
-# ####  Most respondents recorde a cost per night below €500, whilst a smaller number of respondents reported a significantly higher spending.
-# ####  The presence of these higher vlaues creates a longer tail ont he right hand side of the distribution, indicating potential outliers.
 
 # In[ ]:
 
