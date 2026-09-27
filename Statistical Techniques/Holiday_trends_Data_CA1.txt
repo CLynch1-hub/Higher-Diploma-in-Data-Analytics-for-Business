@@ -241,7 +241,9 @@ plt.show()
 
 
 
-# ## The age distribution chart shows that respondents were reasonably evenly distributed across the younger and middle-age categories. The 25–34 and 35–44 age groups represented the largest proportion of respondents, while the 65+ category contained the fewest responses.
+# ### The age distribution chart shows that respondents were reasonably evenly distributed across the younger and middle-age categories. The 25–34 and 35–44 age groups represented the largest proportion of respondents, while the 65+ category contained the fewest responses.
+
+# ## Cost Per Night Analysis
 
 # ### Create a new Data Frame called GroupSize.  Take columns, Group_Size, Holiday_Length, Total_Cost & Satisfaction.  
 
@@ -315,7 +317,9 @@ plt.show()
 # #### The results suggest that middle aged respondents tend to spend more per night on the overall holiday related expenditure, than their younger or older respondents.
 # #### However caution is needed when interpreting the results due to the smaller sample size in the 65+ category
 
-# In[27]:
+# ## Distribution of Cost Per Night using Seaborn Library
+
+# In[29]:
 
 
 plt.figure(figsize=(8,5) )
@@ -337,9 +341,15 @@ plt.show()
 
 
 
+# In[ ]:
+
+
+
+
+
 # ####  The histogram of Cost_Per_Night demonstrates a positive skewed distribution.
-# ####  Most respondents recorde a cost per night below €500, whilst a smaller number of respondents reported a significantly higher spending.
-# ####  The presence of these higher vlaues creates a longer tail ont he right hand side of the distribution, indicating potential outliers.
+# ####  Most respondents recorded a cost per night below €500, whilst a smaller number of respondents reported a significantly higher spending.
+# ####  The presence of these higher vlaues creates a longer tail on the right hand side of the distribution, indicating potential outliers.
 
 # In[ ]:
 
